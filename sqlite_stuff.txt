@@ -1,0 +1,14 @@
+http://php.net/manual/en/pdostatement.fetch.php
+
+c:\sqlite>sqlite3 test.db
+SQLite version 3.13.0 2016-05-18 10:57:30
+Enter ".help" for usage hints.
+sqlite> create table messages(BoardID text collate nocase, ClientID text, CreationDate datetime
+, Data text);
+   ...> ;
+sqlite> insert into messages values ('ef12','1234','2016-06-29 02:20:00','{"text" : "some d
+ata"');
+sqlite> select * from messages
+   ...> ;
+ef12|1234|2016-06-29 02:20:00|some data
+sqlite>
