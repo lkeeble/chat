@@ -1,14 +1,12 @@
-http://php.net/manual/en/pdostatement.fetch.php
-
-c:\sqlite>sqlite3 test.db
+How to create the chat database for the first time
+--------------------------------------------------
+c:\sqlite>sqlite3 chat.db
 SQLite version 3.13.0 2016-05-18 10:57:30
 Enter ".help" for usage hints.
 sqlite> create table messages(BoardID text collate nocase, ClientID text, CreationDate datetime
 , Data text);
    ...> ;
-sqlite> insert into messages values ('ef12','1234','2016-06-29 02:20:00','{"text" : "some d
-ata"');
-sqlite> select * from messages
-   ...> ;
-ef12|1234|2016-06-29 02:20:00|some data
-sqlite>
+sqlite> insert into messages (BoardID, ClientID, CreationDate, Data) values ('ef
+12', '1234','2016-08-5 11:24:00', '{"text" : "some data"}');
+sqlite> select * from messages;
+   
