@@ -26,13 +26,13 @@
       <link rel="stylesheet" href="chat.css?v=2">
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 <script>
-    var messagesWindow = $("#messagesTextarea");
-    var chatWindow = $("#chatTextarea");
-    
     $(chat);
 
     function chat()	{
     var debug = true;
+    var $messagesTextarea = $('#messagesTextarea');
+    var $chatTextarea = $('#chatTextarea');
+    var $handle = $('#handle');
 
     function log(msg) {
       if (debug) {
@@ -48,10 +48,10 @@
       var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
     }
     
-    $('#chatWindow').keypress(function(e) {
+    $chatTextarea.keypress(function(e) {
       if (e.which == 13) {
-        var text = $('chatWindow').val();
-        var handle = $('handle').val();
+        var text = $chatTextarea.val();
+        var handle = $handle.val();
         var message = Message.createChatMessage(handle, text);
         
         sendMessage(message);
@@ -132,11 +132,11 @@
       var handle = message.handle;
       var messageDate = message.nowISO;
       
-      messagesWindow.value = messagesWindow.Value + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text; 
+      messagesTextarea.val(messagesTextarea.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
     }
     
     function clearMessages() {
-      messagesWindow.value = '';
+      messagesTextarea.val('');
     }
       
     function getMessagesError(jqXHR, status, error) {
