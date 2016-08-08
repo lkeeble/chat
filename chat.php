@@ -55,6 +55,7 @@
         var message = Message.createChatMessage(handle, text);
         
         sendMessage(message);
+        $chatTextarea.val('');
       }
     });
     
