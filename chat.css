@@ -1,0 +1,150 @@
+#topToolbar {
+  
+  position: absolute;
+  left: 20px;
+  top: 20px;  
+  background-color: lightyellow;
+  padding: 10px;
+  border: 2px solid fuchsia;
+  display: inline-block; /* set width of div to contents, see http://stackoverflow.com/questions/450903/how-to-make-div-not-larger-than-its-contents */
+}
+
+#messages > div{
+  border: 1px solid blue;
+  margin: 5px;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: lightyellow;
+  height: auto;  
+}
+
+
+#chatWindow {
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   height: auto;
+ /*  background:#999; */
+}
+
+
+#chatTextarea {
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+  resize: none; 
+  border-radius: 10px;
+  border: 1px #efefef;
+  background-color: #eeeeee;
+}
+
+#canvas {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  border: 2px solid fuchsia;
+  background-color: rgba(255,255,255,1.0);
+}
+
+#toolbar {
+  position: absolute;
+  left: 1240px;
+  top:80px;
+  background-color: white;
+  border: 2px solid fuchsia;
+}
+
+#toolbar td {
+  vertical-align:middle; text-align:center; 
+  border: 2px solid white;
+  height: 50px;
+  width: 50px;
+}
+
+#toolbar td.hover-highlight:hover {
+  border: 2px solid fuchsia;
+  background-color: #eeeeee;
+  cursor: default; /* otherwise it changes to a line cursor when hovering over copy/paste/delete/etc text. */
+}
+
+.selected {
+  border: 2px solid fuchsia !important;
+  background-color: #eeeeee;
+}
+
+.black {
+  color: blue;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: lightblue;
+  /* 
+  background-image: url('vache_salers.jpg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  */
+}
+
+
+/* Custom cursors should be 32px or less according to stuff I've read online (which must be true...) */
+.blue-pencil {
+    cursor: url('./fontawesome_pencil_32x32_blue.png'), pointer;
+}
+
+.red-pencil {
+    cursor: url('./fontawesome_pencil_32x32_red.png'), pointer;
+}
+    
+.green-pencil {
+    cursor: url('./fontawesome_pencil_32x32_green.png'), pointer;
+}
+
+.black-pencil {
+    cursor: url('./fontawesome_pencil_32x32_black.png'), pointer;
+}
+
+.black-paintbrush {
+    cursor: url('./fontawesome_paintbrush_32x32_black.png'), pointer;
+}
+
+.blue-paintbrush {
+    cursor: url('./fontawesome_paintbrush_32x32_blue.png'), pointer;
+}
+
+.red-paintbrush {
+    cursor: url('./fontawesome_paintbrush_32x32_red.png'), pointer;
+}
+
+.green-paintbrush {
+    cursor: url('./fontawesome_paintbrush_32x32_green.png'), pointer;
+}
+
+.eraser {
+    cursor: url('./fontawesome_eraser_32x32_black.png'), pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.none {
+  display: none;
+}
+
+#btnCustomFileUpload {
+  margin-left: 40px;
+}
