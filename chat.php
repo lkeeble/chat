@@ -20,9 +20,12 @@
       <link rel="stylesheet" href="chat.css?v=2">
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 <script>
+    var messagesWindow = $("#messagesTextarea");
+    var chatWindow = $("#chatTextarea");
+    
     $(chat);
 
-function chat()	{
+    function chat()	{
     var debug = true;
 
     function log(msg) {
@@ -38,6 +41,20 @@ function chat()	{
       otherClientMessageLatestDate = nowISO;
       var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
     }
+    
+    $('#chatWindow').keypress(function(e) {
+      if (e.which == 13) {
+        var text = $('chatWindow').val();
+        var handle = $('handle').val();
+        var message = Message.createChatMessage(handle, text);
+        
+        sendMessage(message);
+      }
+    });
+    
+    $('#btnClear').click(function(e) {
+      var message = Message.createClearMessage();
+    });
 
     function getAllMessages() {
         $.ajax({
@@ -77,14 +94,14 @@ function chat()	{
     }
     
     function getMessagesSuccess(data, status) {
-      var messagesStrArr = data.messages; // array of strings containing JSON for the segment.
+      var messagesStrArr = data.messages; // array of strings containing JSON for the messages
       if (messagesStrArr.length == 0) {
         return;
       }
       
       var messagesArr = [];
       for (var i = 0; i < messagesStrArr.length - 1; i++) {
-        var segment = JSON.parse(messagesStrArr[i]);
+        var message = JSON.parse(messagesStrArr[i]);
         messagesArr.push(segment);
       }
       
@@ -92,16 +109,28 @@ function chat()	{
       otherClientMessageLatestDate = messagesStrArr[messagesStrArr.length - 1];
       
       for (var i = 0; i < messagesArr.length; i++) {
-        var segment = messagesArr[i];
+        var message = messagesArr[i];
         
         var action = messagesArr[i].action;
         if (action == "clear") {
-          clearCanvas();
+          clearMessages();
         }
         else if (action == "send") {
-          appendMessage(messagesArr[i].message)          
+          appendMessage(messagesArr[i])          
         }        
       }
+    }
+    
+    function appendMessage(message) {
+      var text = message.text;
+      var handle = message.handle;
+      var messageDate = message.nowISO;
+      
+      messagesWindow.value = messagesWindow.Value + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text; 
+    }
+    
+    function clearMessages() {
+      messagesWindow.value = '';
     }
       
     function getMessagesError(jqXHR, status, error) {
@@ -154,26 +183,16 @@ function chat()	{
       alert("sendMessageData error: " + thrownError);
     }
     
-    function clearToolbarHighlights() {
-      $('#toolbar td').removeClass("selected");
-    }
-    
-    // See http://stackoverflow.com/questions/5767325/remove-a-particular-element-from-an-array-in-javascript.
-    // Note: IE 8 and below don't support indexOf, see the above link for a polyfill if needed.
-    function removeItem(item) {
-      var index = items.indexOf(item);
-      if (index > -1) {
-        items.splice(index, 1);
-      }
-    }
-    
     function Message() {
     }
 
-    Message.createChatMessage = function(text) {
+    Message.createChatMessage = function(handle, text) {
       var s = new Message();
       s.action = "chat";
+      s.handle = handle;
       s.text = text;
+      var nowISO = (new Date()).toISOString();
+      s.nowISO = nowISO;
       
       return s; 
     }
@@ -196,6 +215,9 @@ function chat()	{
         <strong>Board Name:</strong>  
         <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">  
         <button type="button" id="btnSetBoardName">Go</button> <?php // type="button" makes the button not submit the form ?>
+        <strong>Handle:</strong>
+        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>">
+        <input type="button" id="btnClear">Clear</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     </form>
