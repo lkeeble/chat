@@ -2,13 +2,19 @@
 <?php
   session_start(); // repeatedly calling this should be OK i.e. we should keep the same session.
   $boardName = "Test board";
+  $handle = "Test handle";
   if (isset($_POST["boardname"])) {
     $boardName = $_POST["boardname"];
   } elseif (isset($_GET["boardname"])) {
     $boardName = $_GET["boardname"];
   }
       
-  if ($_GET)
+  if (isset($_POST["handle"])) {
+    $handle = $_POST["handle"];
+  } elseif (isset($_GET["handle"])) {
+    $handle = $_GET["handle"];
+  }
+
 ?>
 
 <html>
@@ -216,21 +222,16 @@
         <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">  
         <button type="button" id="btnSetBoardName">Go</button> <?php // type="button" makes the button not submit the form ?>
         <strong>Handle:</strong>
-        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>">
-        <input type="button" id="btnClear">Clear</button>  
+        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
+        <button type="button" id="btnClear">Clear</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     </form>
-
-    <textarea id="messagesTextarea">Test test test test test test test test
-      Test test test test test test test test Test test test test test test test test
-      Test test test test test test test test
-      Test test test test test test test test
-      Test test test test test test test test
-      Test test test test test test test test
+    
+    <textarea id="messagesTextarea">
     </textarea>
     <div id="spacer">&nbsp;</div>
-    <textarea rows="3" cols="80" id="chatTextarea"></textarea>
+    <textarea rows="3" id="chatTextarea"></textarea>
 
   </body>
 </html>
