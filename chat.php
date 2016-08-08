@@ -14,61 +14,29 @@
 <html>
   <head>
       <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-      <title>Scribble</title>
+      <title>Chat</title>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
       <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
-      <!-- <link rel="stylesheet" href="reset.css"> -->
-      <link rel="stylesheet" href="scribble.css?v=2">
+      <link rel="stylesheet" href="chat.css?v=2">
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 <script>
-    $(scribble);
+    $(chat);
 
-function scribble()	{
-    "use strict";
-    
+function chat()	{
     var debug = true;
-    // this is the same as document.getElementById('canvas');
-    var canvas = $('#canvas')[0];
-    // different browsers support different contexts. All support 2d
-    var context = canvas.getContext('2d');
-    var eventLoopDelay = 1000/60; // delay in millisecs
-    var initialMouseX = null;
-    var initialMouseY = null;
-    var initialDraggingItem = null;
-    var penColor = "black";
-    var penWidth = 1; 
-    var penDown = false;
-    var drawPrevX = null;
-    var drawPrevY = null;
-    var segment = null;
-    var otherClientMessageLatestDate = "1900-01-01T00:00:00";
-    
-    var message = "";
-    var canvasBoundingRect = canvas.getBoundingClientRect();
-    
+
     function log(msg) {
       if (debug) {
         console.log(msg);
       }
     }
     
-    // See: http://stackoverflow.com/questions/20857593/canvas-mouse-event-position-different-than-cursor
-    function getMouseX(evt) {
-      return evt.clientX - canvasBoundingRect.left;
-    }
-    
-    function getMouseY(evt) {
-      return evt.clientY - canvasBoundingRect.top;
-    }
-    
-    function initScribble() {
+    function initChat() {
       
       getAllMessages();
       var nowISO = (new Date()).toISOString(); 
       otherClientMessageLatestDate = nowISO;
       var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
-      
-      pickBluePencil();
     }
 
     function getAllMessages() {
@@ -125,25 +93,13 @@ function scribble()	{
       
       for (var i = 0; i < messagesArr.length; i++) {
         var segment = messagesArr[i];
-        var penColor = segment.penColor;
-        var penWidth = segment.penWidth;  
-        var prevCoord = null;
         
         var action = messagesArr[i].action;
         if (action == "clear") {
           clearCanvas();
         }
-        else if (action == "draw") {
-          var coordsArr = segment.coords;
-          for (var j = 0; j < coordsArr.length; j++) {
-            if (j == 0) {
-              prevCoord = coordsArr[j];
-              continue;
-            }
-            var coord = coordsArr[j];                    
-            drawLine(prevCoord[0], prevCoord[1], coord[0], coord[1], penColor, penWidth);
-            prevCoord = [coord[0], coord[1]];
-          }
+        else if (action == "send") {
+          appendMessage(messagesArr[i].message)          
         }        
       }
     }
@@ -163,157 +119,17 @@ function scribble()	{
       });
     }
       
-    $('#canvas').mousedown(function(evt) {
-      log('mousedown');
-      
-      // Prevent cursor changing to an I-beam text selection cursor in Chrome.
-      // http://stackoverflow.com/questions/2659999/html5-canvas-hand-cursor-problems
-      evt.preventDefault();
-      evt.stopPropagation();
-      
-      penDown = true;
-      segment = Message.createDrawMessage(penColor, penWidth);
-      
-      drawPrevX = getMouseX(evt);
-      drawPrevY = getMouseY(evt);
-      
-      segment.addCoord([drawPrevX, drawPrevY]);
-    });
-    
-    $('#canvas').mousemove(function(evt) {
-      log('mousemove');
-      
-      if (penDown) {
-        draw(evt);
-      }
-    });
-
-    $('#canvas').mouseup(function(evt) {
-      log('mouseup');
-      
-      if (penDown) {
-        sendMessage(segment);
-      } 
-
-      penDown = false;
-    });
-
-    $('#tb-eraser').click(function (evt) {
-      penColor = "white";
-      penWidth = "50";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("eraser");
-    });
-
-    $('#tb-black-pencil').click(function (evt) {
-      penColor = "black";
-      penWidth = "1";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("black-pencil");
-    });
-    
-    $('#tb-blue-pencil').click(function (evt) {
-      penColor = "blue";
-      penWidth = "1";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("blue-pencil");
-    });
-    
-    function pickBluePencil() {
-      penColor = "blue";
-      penWidth = "1";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("blue-pencil");
-    }
-    
-  $('#tb-red-pencil').click(function (evt) {
-    penColor = "red";
-    penWidth = "1";
-    clearToolbarHighlights();
-    $(this).addClass("selected");
-    $('#canvas').removeClass().addClass("red-pencil");
-  });
-
-    $('#tb-green-pencil').click(function (evt) {
-      penColor = "green";
-      penWidth = "1";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("green-pencil");
-    });
-    
-    $('#tb-black-paintbrush').click(function (evt) {
-      penColor = "black";
-      penWidth = "3";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("black-paintbrush");
-    });
-
-    $('#tb-blue-paintbrush').click(function (evt) {
-      penColor = "blue";
-      penWidth = "3";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("blue-paintbrush");
-    });
-
-    $('#tb-red-paintbrush').click(function (evt) {
-      penColor = "red";
-      penWidth = "3";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("red-paintbrush");
-    });
-
-    $('#tb-green-paintbrush').click(function (evt) {
-      penColor = "green";
-      penWidth = "3";
-      clearToolbarHighlights();
-      $(this).addClass("selected");
-      $('#canvas').removeClass().addClass("green-paintbrush");
-    });
-
-    $('#tb-mouse-pointer').click(function (evt) {
-      penDown = false;
-    });
-    
-    $('#tb-clear').click(function (evt) {
-      var confirmed = true; // confirm("Clear the entire board?");
-      if (confirmed) {
-        clearCanvas();
-        clearAllMessages();
-      }
-    });
-    
-    $('#btnSetBoardName').click(function (evt) {
-      submitFormWithBoardName();         
-      // clearCanvas();
-      // getAllMessages();
-    });
-      
-    $('#boardID').keypress(function(e) {
-        if (e.which == 13) {
-          submitFormWithBoardName();         
-          return false; <?php // prevent double submit ?>  
-        }
-    });
-    
     function submitFormWithBoardName() {
       var mainForm = $('#mainForm');
-      mainForm.attr("action", "scribble.php?boardname=" + $('#boardID').val());
+      mainForm.attr("action", "chat.php?boardname=" + $('#boardID').val());
       mainForm.submit();
     }
     
-    function sendMessage(segment) {
+    function sendMessage(message) {
         var boardID = $('#boardID').val();
         var clientID = $('#clientID').val(); // replace with <?php session_id() ?> when done debugging.
 
-        sendMessageData(boardID, clientID, segment);
+        sendMessageData(boardID, clientID, message);
     }
     
     function clearCanvas() {
@@ -342,32 +158,6 @@ function scribble()	{
       $('#toolbar td').removeClass("selected");
     }
     
-    // See http://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse
-    function draw(evt) {
-      var x = getMouseX(evt);
-      var y = getMouseY(evt);
-      if (x == drawPrevX && y == drawPrevY) {
-        return; // Only draw if the position has changed.
-      }
-      
-      drawLine(x, y, drawPrevX, drawPrevY, penColor, penWidth);
-      
-      segment.addCoord([x,y]);
-      
-      drawPrevX = x;
-      drawPrevY = y;
-    }
-    
-    function drawLine(x1, y1, x2, y2, penColor, penWidth) {
-      context.beginPath();
-      context.moveTo(x1, y1);
-      context.lineTo(x2, y2);
-      context.strokeStyle = penColor;
-      context.lineWidth = penWidth;
-      context.stroke();
-      context.closePath();
-    }
-    
     // See http://stackoverflow.com/questions/5767325/remove-a-particular-element-from-an-array-in-javascript.
     // Note: IE 8 and below don't support indexOf, see the above link for a polyfill if needed.
     function removeItem(item) {
@@ -377,23 +167,13 @@ function scribble()	{
       }
     }
     
-    function removeSelectedItem() {
-      if (!selectedItem) {
-        return;
-      }
-      
-      removeItem(selectedItem);
-    }
-    
     function Message() {
     }
 
-    Message.createDrawMessage = function(penColor, penWidth) {
+    Message.createChatMessage = function(text) {
       var s = new Message();
-      s.action = "draw";
-      s.penColor = penColor;
-      s.penWidth = penWidth;
-      s.coords = [];
+      s.action = "chat";
+      s.text = text;
       
       return s; 
     }
@@ -405,16 +185,12 @@ function scribble()	{
       return s;
     }
     
-    Message.prototype.addCoord = function(c) {
-      this.coords.push(c);
-    }
-    
-    initScribble();
+    initChat();
   }
     </script>
   </head>
 
-  <body>   
+  <body>
     <form id="mainForm" method="post" action="scribble.php">
       <div id="topToolbar">
         <strong>Board Name:</strong>  
@@ -424,65 +200,15 @@ function scribble()	{
       </div>
     </form>
 
-    <canvas id="canvas" width="1200px" height="800px">
-      Sorry, your browser does not support the HTML5 Canvas feature :-(
-    </canvas>  
-      
-    <div id="toolbar"> 
-      <table>
-        <tr>
-          <td id="tb-clear" class="hover-highlight" >
-            <i class="fa fa-times fa-2x"></i><br>
-            Clear
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-eraser" class="hover-highlight" >
-            <i class="fa fa-eraser fa-2x"></i><br>
-            Eraser
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-black-pencil" class="hover-highlight" >
-            <i id="black-pencil" class="fa fa-pencil fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-blue-pencil" class="hover-highlight blue" >
-            <i id="blue-pencil" class="fa fa-pencil fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-red-pencil" class="hover-highlight red" >
-            <i id="red-pencil" class="fa fa-pencil fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-green-pencil" class="hover-highlight green" >
-            <i id="green-pencil" class="fa fa-pencil fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-black-paintbrush" class="hover-highlight" >
-            <i id="black-paintbrush" class="fa fa-paint-brush fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-blue-paintbrush" class="hover-highlight blue" >
-            <i id="blue-paintbrush" class="fa fa-paint-brush fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-red-paintbrush" class="hover-highlight red" >
-            <i id="red-paintbrush" class="fa fa-paint-brush fa-2x"></i><br>
-          </td>
-        </tr>
-        <tr>
-          <td id="tb-green-paintbrush" class="hover-highlight green" >
-            <i id="green-paintbrush" class="fa fa-paint-brush fa-2x"></i><br>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <textarea id="messagesTextarea">Test test test test test test test test
+      Test test test test test test test test Test test test test test test test test
+      Test test test test test test test test
+      Test test test test test test test test
+      Test test test test test test test test
+      Test test test test test test test test
+    </textarea>
+    <div id="spacer">&nbsp;</div>
+    <textarea rows="3" cols="80" id="chatTextarea"></textarea>
+
   </body>
 </html>
