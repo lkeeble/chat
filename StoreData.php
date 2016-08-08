@@ -7,7 +7,7 @@ header('Content-Type: application/json;charset=utf-8');
 try {
   $boardID = $_POST["BoardID"];
   $clientID = $_POST["ClientID"];
-  $segmentData = $_POST['SegmentData'];
+  $messageData = $_POST['MessageData'];
   
   // Creation date is stored in UTC. This makes date storage independent of the web server's timezone setting.
   // Makes it possible to copy databases between PHP 5.2 (prod) and PHP 5.5 (dev). 
@@ -20,9 +20,9 @@ try {
   // For more info, look up the config setting "magic_quotes_gpc". 
   // Fix this here so that we don't store escaped double quotes in the database. 
   // This makes it so that we can move databases around between PHP 5.2 (prod) and PHP 5.5 (dev).
-  $segmentData = fixEscaping($segmentData);
+  $messageData = fixEscaping($messageData);
   
-  insertBoardData($pdo, $boardID, $clientID, $creationDate, $segmentData);
+  insertBoardData($pdo, $boardID, $clientID, $creationDate, $messageData);
   $retArr = array('status' => 'success');
   echo json_encode($retArr);
 } catch (Exception $e) {
@@ -32,7 +32,7 @@ try {
 }
 
 function insertBoardData($pdo, $boardID, $clientID, $creationDate, $data) {
-  $sql = "insert into segments (BoardID, ClientID, CreationDate, Data) values (?,?,?,?)";
+  $sql = "insert into messages (BoardID, ClientID, CreationDate, Data) values (?,?,?,?)";
   $pdo->prepare($sql)->execute(array($boardID,$clientID,$creationDate,$data));
 }
 ?>

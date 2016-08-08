@@ -91,8 +91,8 @@
       
     function sendClearMessage() {
         // Send message so that all other clients can be cleared as well.
-        segment = Message.createClearMessage();
-        sendMessage(segment);
+        var message = Message.createClearMessage();
+        sendMessage(message);
     }
     
     function clearMessagesError() {
@@ -108,10 +108,10 @@
       var messagesArr = [];
       for (var i = 0; i < messagesStrArr.length - 1; i++) {
         var message = JSON.parse(messagesStrArr[i]);
-        messagesArr.push(segment);
+        messagesArr.push(message);
       }
       
-      // The creation date of the final segment is tacked onto the data. 
+      // The creation date of the final message is tacked onto the data. 
       otherClientMessageLatestDate = messagesStrArr[messagesStrArr.length - 1];
       
       for (var i = 0; i < messagesArr.length; i++) {
@@ -171,11 +171,11 @@
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
     
-    function sendMessageData(boardID, clientID, segment) {
+    function sendMessageData(boardID, clientID, message) {
       $.ajax({
         type: "POST",
         url: "StoreData.php",
-        data: {BoardID : boardID, ClientID : clientID, MessageData : JSON.stringify(segment)},
+        data: {BoardID : boardID, ClientID : clientID, MessageData : JSON.stringify(message)},
         success : sendMessageSuccess,
         error : sendMessageError
       });

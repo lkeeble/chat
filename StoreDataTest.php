@@ -16,7 +16,7 @@ echo "session id: " . session_id() . "<br>";
     </tr>
     <tr>
       <td>Data:</td>
-      <td><input type="text" name="SegmentData"></td>
+      <td><input type="text" name="MessageData"></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Submit"></td>

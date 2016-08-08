@@ -46,7 +46,7 @@ function getMessagesFromOtherClients($pdo, $boardID, $clientID, $beginDate) {
   foreach ($rows as $row) {
     array_push($dataArr, $row['Data']);
   }
-  // Add the latest segment date
+  // Add the latest message date
   if (count($rows) > 0) {
     array_push($dataArr, $row['CreationDate']);
   }
@@ -64,7 +64,7 @@ function getAllMessages($pdo, $boardID) {
   foreach ($rows as $row) {
     array_push($dataArr, $row['Data']);
   }
-  // Add the latest segment date
+  // Add the latest message date
   if (count($rows) > 0) {
     array_push($dataArr, $row['CreationDate']);
   }
