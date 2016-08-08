@@ -122,7 +122,7 @@
         if (action == "clear") {
           clearMessages();
         }
-        else if (action == "send") {
+        else if (action == "chat") {
           appendMessage(messagesArr[i])          
         }        
       }
@@ -133,11 +133,11 @@
       var handle = message.handle;
       var messageDate = message.nowISO;
       
-      messagesTextarea.val(messagesTextarea.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
+      $messagesTextarea.val($messagesTextarea.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
     }
     
     function clearMessages() {
-      messagesTextarea.val('');
+      $messagesTextarea.val('');
     }
       
     function getMessagesError(jqXHR, status, error) {
