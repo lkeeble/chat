@@ -126,6 +126,8 @@
           appendMessage(messagesArr[i])          
         }        
       }
+      
+      scrollDown();
     }
     
     function appendMessage(message) {
@@ -190,6 +192,10 @@
     
     function sendMessageError(xhr, ajaxOptions, thrownError) {
       alert("sendMessageData error: " + thrownError);
+    }
+    
+    function scrollDown() { 
+      $messagesDiv.scrollTop($messagesDiv[0].scrollHeight);
     }
     
     function Message() {
