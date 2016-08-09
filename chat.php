@@ -33,6 +33,7 @@
     var $messagesDiv = $('#messagesDiv');
     var $chatTextarea = $('#chatTextarea');
     var $handle = $('#handle');
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
     function log(msg) {
       if (debug) {
@@ -49,6 +50,13 @@
       $chatTextarea.focus();
     }
     
+    function linkify(text) {
+        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlRegex, function(url) {
+            return '<a href="' + url + '" target="_blank">' + url + '</a>';
+        });
+    }
+        
     $chatTextarea.keypress(function(e) {
       if (e.which == 13) {
         var text = $chatTextarea.val();
@@ -180,6 +188,7 @@
     
     function appendMessage(message) {
       var text = message.text;
+      text = linkify(text);
       var handle = message.handle;
       var messageDate = message.nowISO;
       var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
