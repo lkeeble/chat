@@ -14,6 +14,10 @@ body {
 }
 
 #messagesDiv {
+  /* see http://www.cssmatic.com/box-shadow */
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);  
   height: 500px;
   width: 98%;  
   padding: 5px;
@@ -40,6 +44,10 @@ body {
 }
 
 #chatTextarea {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);  
+
   width: 98%;
   vertical-align: top;
   resize: none;
@@ -51,6 +59,6 @@ body {
 }
 
 #spacer {
-  height: 10px;
+  height: 15px;
 }
 
