@@ -30,7 +30,7 @@
 
     function chat()	{
     var debug = true;
-    var $messagesTextarea = $('#messagesTextarea');
+    var $messagesDiv = $('#messagesDiv');
     var $chatTextarea = $('#chatTextarea');
     var $handle = $('#handle');
 
@@ -132,12 +132,14 @@
       var text = message.text;
       var handle = message.handle;
       var messageDate = message.nowISO;
-      
-      $messagesTextarea.val($messagesTextarea.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
+      var messageText = '(' + message.nowISO + ') ' + message.handle + ':' + text;
+      var $messageDiv = $('<div>' + messageText + '</div><br>');
+      $messagesDiv.append($messageDiv);
+      //$messagesDiv.val($messagesDiv.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
     }
     
     function clearMessages() {
-      $messagesTextarea.val('');
+      $messagesDiv.empty();
     }
       
     function getMessagesError(jqXHR, status, error) {
@@ -229,8 +231,11 @@
       </div>
     </form>
     
-    <textarea id="messagesTextarea">
-    </textarea>
+    <div id="messagesDiv">
+      <div id="message1">
+        a test Message
+      </div><br>
+    </div>
     <div id="spacer">&nbsp;</div>
     <textarea rows="3" id="chatTextarea"></textarea>
 

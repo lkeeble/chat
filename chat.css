@@ -7,11 +7,23 @@ body {
     margin-bottom: 10px;
 }
 
-#messagesTextarea {
+#messagesDiv {
   height: 500px;
   width: 90%;  
   padding: 5px;
   resize: none;
+  overflow:auto;
+}
+
+#messagesDiv div {
+  border: 2px solid fuchsia;
+  background-color: lightyellow;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  display: inline-block;
+  height: auto;
+  /* width: auto; */
 }
 
 #chatTextarea {
