@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
   session_start(); // repeatedly calling this should be OK i.e. we should keep the same session.
-  $boardName = "The test board";
-  $handle = "John";
+  $boardName = "TestBoard123";
+  $handle = "John Doe";
   if (isset($_POST["boardname"])) {
     $boardName = $_POST["boardname"];
   } elseif (isset($_GET["boardname"])) {
@@ -235,7 +235,7 @@
         <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">
         <button type="button" id="btnSetBoardName">Go</button> <?php // type="button" makes the button not submit the form ?>
         &nbsp;&nbsp;  
-        <strong>Username:</strong>
+        <strong>Your handle:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
         <button type="button" id="btnClear">Clear all messages</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
