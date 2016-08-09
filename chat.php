@@ -60,6 +60,9 @@
         scrollDown();
         clearChatWindow();
         $chatTextarea.focus();
+        
+        // Stop newline from going into the textarea when the user hits enter.
+        e.preventDefault();
       }
     });
     
