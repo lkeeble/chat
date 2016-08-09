@@ -59,6 +59,7 @@
         appendMessage(message);
         scrollDown();
         clearChatWindow();
+        $chatTextarea.focus();
       }
     });
     
@@ -67,8 +68,8 @@
     }
     
     $('#btnClear').click(function(e) {
-      sendClearMessage();
-      clearChats();
+      clearAllMessagesOnServer();
+      clearAllMessagesOnClient();
     });
 
     function getAllMessages() {
@@ -82,19 +83,19 @@
         });
     }
     
-    function clearAllMessages() {
+    function clearAllMessagesOnServer() {
       // Clear the database records for this board.
       $.ajax({
         type: "GET",
         url: "ClearData.php",
         dataType: "json",
         data: {BoardID : $('#boardID').val()},
-        success : clearMessagesSuccess,
+        success : clearAllMessagesOnServerSuccess,
         error : clearMessagesError
       });
     }
     
-    function clearMessagesSuccess() {
+    function clearAllMessagesOnServerSuccess() {
       sendClearMessage();
     }
       
@@ -105,7 +106,7 @@
     }
     
     function clearMessagesError() {
-              alert('ajax clearAllMessages() call failed, status: ' + status);
+              alert('ajax clearAllMessagesOnServer() call failed, status: ' + status);
     }
     
     function getMessagesSuccess(data, status) {
@@ -128,7 +129,7 @@
         
         var action = messagesArr[i].action;
         if (action == "clear") {
-          clearMessages();
+          clearAllMessagesOnServer();
         }
         else if (action == "chat") {
           appendMessage(messagesArr[i])          
@@ -147,7 +148,7 @@
       $messagesDiv.append($messageDiv);
     }
     
-    function clearMessages() {
+    function clearAllMessagesOnClient() {
       $messagesDiv.empty();
     }
       
@@ -177,10 +178,6 @@
         var clientID = $('#clientID').val(); // replace with <?php session_id() ?> when done debugging.
 
         sendMessageData(boardID, clientID, message);
-    }
-    
-    function clearCanvas() {
-      context.clearRect(0, 0, canvas.width, canvas.height);
     }
     
     function sendMessageData(boardID, clientID, message) {
