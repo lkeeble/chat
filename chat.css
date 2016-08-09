@@ -18,7 +18,7 @@ body {
   resize: none;
   overflow:auto;
   border: 2px solid black;
-  background-color:white;
+  background-color:#f0f0f0;
   font-family: "Courier";
   font-size: 0.8em;
 }
