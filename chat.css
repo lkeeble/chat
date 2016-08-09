@@ -7,6 +7,10 @@ body {
     margin-bottom: 10px;
 }
 
+.handle {
+  font-weight: bold;
+}
+
 #messagesDiv {
   height: 500px;
   width: 98%;  

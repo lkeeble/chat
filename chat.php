@@ -143,7 +143,7 @@
       var text = message.text;
       var handle = message.handle;
       var messageDate = message.nowISO;
-      var messageText = '(' + message.nowISO + ') ' + message.handle + ':' + text;
+      var messageText = '(' + message.nowISO + ') <span class="handle">' + message.handle + '</span>: ' + text;
       var $messageDiv = $('<div>' + messageText + '</div><br>');
       $messagesDiv.append($messageDiv);
     }
