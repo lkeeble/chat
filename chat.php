@@ -55,12 +55,19 @@
         var message = Message.createChatMessage(handle, text);
         
         sendMessage(message);
-        $chatTextarea.val('');
+        appendMessage(message);
+        scrollDown();
+        clearChatWindow();
       }
     });
     
+    function clearChatWindow() {
+        $chatTextarea.val('');
+    }
+    
     $('#btnClear').click(function(e) {
-      var message = Message.createClearMessage();
+      sendClearMessage();
+      clearChats();
     });
 
     function getAllMessages() {
@@ -137,7 +144,6 @@
       var messageText = '(' + message.nowISO + ') ' + message.handle + ':' + text;
       var $messageDiv = $('<div>' + messageText + '</div><br>');
       $messagesDiv.append($messageDiv);
-      //$messagesDiv.val($messagesDiv.val() + '\n(' + message.nowISO + ') ' + message.handle + ': ' + text); 
     }
     
     function clearMessages() {
