@@ -129,7 +129,7 @@
         
         var action = messagesArr[i].action;
         if (action == "clear") {
-          clearAllMessagesOnServer();
+          clearAllMessagesOnClient();
         }
         else if (action == "chat") {
           appendMessage(messagesArr[i])          

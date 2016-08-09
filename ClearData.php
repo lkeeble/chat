@@ -19,7 +19,7 @@ try {
 }
 
 function clearBoardData($pdo, $boardID) {
-  $sql = "delete from segments where BoardID = ?";
+  $sql = "delete from messages where BoardID = ?";
   $pdo->prepare($sql)->execute(array($boardID));
 }
 ?>
