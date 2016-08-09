@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
   session_start(); // repeatedly calling this should be OK i.e. we should keep the same session.
-  $boardName = "Test board";
-  $handle = "Test handle";
+  $boardName = "The test board";
+  $handle = "John";
   if (isset($_POST["boardname"])) {
     $boardName = $_POST["boardname"];
   } elseif (isset($_GET["boardname"])) {
@@ -231,20 +231,18 @@
   <body>
     <form id="mainForm" method="post" action="scribble.php">
       <div id="topToolbar">
-        <strong>Board Name:</strong>  
-        <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">  
+        <strong>Board:</strong>  
+        <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">
         <button type="button" id="btnSetBoardName">Go</button> <?php // type="button" makes the button not submit the form ?>
-        <strong>Handle:</strong>
+        &nbsp;&nbsp;  
+        <strong>Username:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
-        <button type="button" id="btnClear">Clear</button>  
+        <button type="button" id="btnClear">Clear all messages</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     </form>
     
     <div id="messagesDiv">
-      <div id="message1">
-        a test Message
-      </div><br>
     </div>
     <div id="spacer">&nbsp;</div>
     <textarea rows="3" id="chatTextarea"></textarea>
