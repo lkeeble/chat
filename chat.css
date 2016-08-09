@@ -1,6 +1,7 @@
 body {
   background-color: lightblue;
-  font-family: "Lucida Sans Unicode";  
+  /* font-family: "Lucida Sans Unicode"; */  
+  font-family: "Arial";
 }
 
 #topToolbar {
@@ -45,7 +46,8 @@ body {
   border: 2px solid fuchsia; 
   /* background-color: #eeeeee; */
   padding: 5px;
-  font-family: "Lucida Sans Unicode";  
+  /* font-family: "Lucida Sans Unicode"; */  
+  font-family: "Arial";
 }
 
 #spacer {
