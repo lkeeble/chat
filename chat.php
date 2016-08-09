@@ -159,11 +159,31 @@
       scrollDown();
     }
     
+    function fromISODateStrToLocalDateStr(isoDateStr) {
+      var d = new Date(isoDateStr);
+      return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + forceTwoDigits(d.getHours()) + ":" + forceTwoDigits(d.getMinutes()) + ":" + forceTwoDigits(d.getSeconds());       
+    }
+    
+    function forceTwoDigits(i)
+    {
+      if (i < 10) {
+        return "0" + i.toString();
+      }
+      
+      return i.toString();
+    }
+    
+    function testConvertDate() {
+      var convertedData = fromISODateStrToLocalDateStr('2016-08-09T16:42:50.221Z');
+      var i = 0;
+    }
+    
     function appendMessage(message) {
       var text = message.text;
       var handle = message.handle;
       var messageDate = message.nowISO;
-      var messageText = '(' + message.nowISO + ') <span class="handle">' + message.handle + '</span>: ' + text;
+      var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
+      var messageText = '(' + messageDateLocal + ') <span class="handle">' + message.handle + '</span>: ' + text;
       var $messageDiv = $('<div>' + messageText + '</div><br>');
       $messagesDiv.append($messageDiv);
     }
