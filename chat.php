@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
   session_start(); // repeatedly calling this should be OK i.e. we should keep the same session.
-  $boardName = "TestBoard123";
+  $board = "TestBoard123";
   $handle = "John Doe";
-  if (isset($_POST["boardname"])) {
-    $boardName = $_POST["boardname"];
-  } elseif (isset($_GET["boardname"])) {
-    $boardName = $_GET["boardname"];
+  if (isset($_POST["board"])) {
+    $board = $_POST["board"];
+  } elseif (isset($_GET["board"])) {
+    $board = $_GET["board"];
   }
       
   if (isset($_POST["handle"])) {
@@ -71,6 +71,23 @@
       clearAllMessagesOnServer();
       clearAllMessagesOnClient();
     });
+    
+    $('#btnSetBoard').click(function (evt) {
+      submitFormWithBoardName();         
+    });
+      
+    $('#boardID').keypress(function(e) {
+        if (e.which == 13) {
+          submitFormWithBoardName();         
+          return false; <?php // prevent double submit ?>  
+        }
+    });
+    
+    function submitFormWithBoardName() {
+      var mainForm = $('#mainForm');
+      mainForm.attr("action", "chat.php?board=" + $('#boardID').val());
+      mainForm.submit();
+    }
 
     function getAllMessages() {
         $.ajax({
@@ -169,7 +186,7 @@
       
     function submitFormWithBoardName() {
       var mainForm = $('#mainForm');
-      mainForm.attr("action", "chat.php?boardname=" + $('#boardID').val());
+      mainForm.attr("action", "chat.php?board=" + $('#boardID').val());
       mainForm.submit();
     }
     
@@ -232,8 +249,8 @@
     <form id="mainForm" method="post" action="scribble.php">
       <div id="topToolbar">
         <strong>Board:</strong>  
-        <input type="text" id="boardID" name="boardname" value="<?php echo $boardName;?>">
-        <button type="button" id="btnSetBoardName">Go</button> <?php // type="button" makes the button not submit the form ?>
+        <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
+        <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
         &nbsp;&nbsp;  
         <strong>Your handle:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
