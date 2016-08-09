@@ -1,5 +1,5 @@
 TODO:
-* Minimum viable product
+* Fix date to user's local date... 
 
 IDEAS:
 * 
