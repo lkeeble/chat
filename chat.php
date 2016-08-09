@@ -46,6 +46,7 @@
       var nowISO = (new Date()).toISOString(); 
       otherClientMessageLatestDate = nowISO;
       var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
+      $chatTextarea.focus();
     }
     
     $chatTextarea.keypress(function(e) {

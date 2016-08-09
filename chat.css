@@ -9,7 +9,7 @@ body {
 
 #messagesDiv {
   height: 500px;
-  width: 90%;  
+  width: 98%;  
   padding: 5px;
   resize: none;
   overflow:auto;
@@ -27,10 +27,11 @@ body {
 }
 
 #chatTextarea {
-  width: 90%;
+  width: 98%;
   vertical-align: top;
-  resize: none; 
-  background-color: #eeeeee;
+  resize: none;
+  border: 2px solid blue; 
+  /* background-color: #eeeeee; */
   padding: 5px;
 }
 
