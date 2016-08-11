@@ -2,7 +2,7 @@
 // For help with PDO, see https://phpdelusions.net/pdo
 
   function getPDO() {
-    $pdo = new PDO('sqlite:test.db');
+    $pdo = new PDO('sqlite:chat.db');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     return $pdo;

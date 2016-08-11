@@ -1,5 +1,5 @@
 TODO:
-* Fix date to user's local date... 
+* Notify board users of new users in the board. 
 
 IDEAS:
 * 
