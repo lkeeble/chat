@@ -33,6 +33,8 @@
   var $messagesDiv = $('#messagesDiv');
   var $chatTextarea = $('#chatTextarea');
   var $handle = $('#handle');
+  var $boardGroup = $('#boardGroup');
+  var $yourHandleGroup = $('#yourHandleGroup');
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
@@ -71,6 +73,7 @@
   }
     
   function initChat() {
+    setMessagesHeight();
     initPromptMessage();
     getAllMessages();
     var nowISO = (new Date()).toISOString(); 
@@ -78,6 +81,14 @@
     var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
     $chatTextarea.focus();
   }
+  
+  function setMessagesHeight() {
+    $messagesDiv.height($(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100);
+  }
+  
+  $(window).resize(function() {
+    setMessagesHeight();
+  })
   
   function initPromptMessage() {
     $chatTextarea.val(promptMessage);
