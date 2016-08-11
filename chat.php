@@ -36,6 +36,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
+  var promptMessage = 'Start typing! Press Enter to post your message.';
 
   function log(msg) {
     if (debug) {
@@ -70,7 +71,7 @@
   }
     
   function initChat() {
-    
+    initPromptMessage();
     getAllMessages();
     var nowISO = (new Date()).toISOString(); 
     otherClientMessageLatestDate = nowISO;
@@ -78,7 +79,17 @@
     $chatTextarea.focus();
   }
   
+  function initPromptMessage() {
+    $chatTextarea.val(promptMessage);
+    $chatTextarea.addClass('prompt-text');
+  }
+  
   $chatTextarea.keypress(function(e) {
+    var $this = $(this);
+    if ($this.val() == promptMessage) {
+      clearPrompt();      
+    }
+    
     if (e.which == 13) {
       var text = $chatTextarea.val();
       var handle = $handle.val();
@@ -94,6 +105,13 @@
       e.preventDefault();
     }
   });
+  
+  $chatTextarea.addClass('prompt-text');
+  
+  function clearPrompt() {
+    $chatTextarea.val('');
+    // $chatTextarea.removeClass('prompt-text');
+  }
   
   function clearChatWindow() {
       $chatTextarea.val('');
@@ -312,10 +330,9 @@
     
       <div id="messagesDiv"></div>
       <div id="yourHandleGroup">
-        <strong>Your handle:</strong>
+        <strong>Nickname:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
       </div>    
-      <div id="instructions">Type your message below and press Enter to post</div>
       <textarea rows="3" id="chatTextarea"></textarea>
     </form>
   </body>

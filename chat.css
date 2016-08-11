@@ -13,8 +13,14 @@ body {
   font-weight: bold;
 }
 
+.prompt-text {
+  color: #0000ff;
+  font-weight: bold;
+}
+
 #yourHandleGroup, #instructions {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #messagesDiv {
