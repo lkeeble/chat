@@ -1,12 +1,12 @@
 body {
   background-color: lightblue;
-  /* font-family: "Lucida Sans Unicode"; */  
   font-family: "Arial";
 }
 
 #boardGroup {
     margin-top: 10px;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 
 .handle {
@@ -18,57 +18,45 @@ body {
   font-weight: bold;
 }
 
+.message-text {
+  color: black;
+}
+
 #yourHandleGroup, #instructions {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+#btnClear {
+  margin-left: 200px;
+  display: inline-block;
+}
+
 #messagesDiv {
-  /* see http://www.cssmatic.com/box-shadow */
-  /*
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  */  
-  height: 500px;
+  min-height: 200px;
+  min-width: 400px;
+  height: 400px;
   width: 98%;  
   padding: 5px;
-  resize: none;
+  /* resize: none; */
   overflow:auto;
   border: 2px solid black;
   background-color:#fdfdfd;
-  /* font-family: "Arial"; */
   font-size: 0.8em;
 }
 
 #messagesDiv div {
-  /*
-  border: 2px solid fuchsia;
-  background-color: lightyellow;
-  border-radius: 10px;
-  margin: 3px;
-  padding: 5px;
-  */
   padding: 2px;
   display: inline-block;
   height: auto;
-  /* width: auto; */
 }
 
 #chatTextarea {
-  /*
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  */  
-
   width: 98%;
   vertical-align: top;
   resize: none;
   border: 2px solid fuchsia; 
-  /* background-color: #eeeeee; */
   padding: 5px;
-  /* font-family: "Lucida Sans Unicode"; */  
   font-family: "Arial";
 }
 

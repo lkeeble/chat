@@ -106,11 +106,10 @@
     }
   });
   
-  $chatTextarea.addClass('prompt-text');
-  
   function clearPrompt() {
     $chatTextarea.val('');
-    // $chatTextarea.removeClass('prompt-text');
+    $chatTextarea.removeClass('prompt-text');
+    $chatTextarea.addClass('message-text');
   }
   
   function clearChatWindow() {
@@ -325,7 +324,6 @@
         <strong>Board:</strong>  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
-        &nbsp;&nbsp;  
         <button type="button" id="btnClear">Clear all messages</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
