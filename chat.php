@@ -306,17 +306,17 @@
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
         &nbsp;&nbsp;  
-        <strong>Your handle:</strong>
-        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
         <button type="button" id="btnClear">Clear all messages</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
-    </form>
     
-    <div id="messagesDiv">
-    </div>
-    <div id="spacer">&nbsp;</div>
-    <textarea rows="3" id="chatTextarea"></textarea>
-
+      <div id="messagesDiv"></div>
+      <div id="yourHandleGroup">
+        <strong>Your handle:</strong>
+        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
+      </div>    
+      <div id="instructions">Type your message below and press Enter to post</div>
+      <textarea rows="3" id="chatTextarea"></textarea>
+    </form>
   </body>
 </html>

@@ -13,6 +13,10 @@ body {
   font-weight: bold;
 }
 
+#yourHandleGroup, #instructions {
+  margin-top: 10px;
+}
+
 #messagesDiv {
   /* see http://www.cssmatic.com/box-shadow */
   /*
