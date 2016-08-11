@@ -36,7 +36,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
-  var promptMessage = 'Start typing! Press Enter to post your message.';
+  var promptMessage = '1. Enter your message board name above and click "Go". 2. Pick a nickname. 3. Start typing! Press Enter to post your message.';
 
   function log(msg) {
     if (debug) {
@@ -319,7 +319,9 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <div id="topToolbar">
+      <div id="messagesDiv"></div>
+
+      <div id="boardGroup">
         <strong>Board:</strong>  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
@@ -328,7 +330,6 @@
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     
-      <div id="messagesDiv"></div>
       <div id="yourHandleGroup">
         <strong>Nickname:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
