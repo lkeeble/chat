@@ -38,7 +38,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
-  var promptMessage = '1. Enter a message board name above and click "Go". \n2. Pick a nickname :) \n3. Start typing here! Press Enter to post your message.';
+  var promptMessage = '1. Enter a message board name above and click "Go". \n2. Pick a nickname \n3. Start typing here! Press Enter to post your message.';
 
   function log(msg) {
     if (debug) {
