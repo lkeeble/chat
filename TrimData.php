@@ -43,30 +43,38 @@ try {
 }
 
 function trimBoardData($pdo, $board, $hourCutoff) {
-  $sql = "delete from messages where (" . getSqlTimeSinceCreationHours() . ") > ? and  BoardID = ?";
+  $sql = "delete from messages where (" . getSqlTimeSinceCreationHours() . ") > :hourcutoff and  BoardID = :boardid";
+  $hourCutoffInt = intval($hourCutoff);
 
   global $debug;
   if ($debug) {
-    echo "hour cutoff: " . $hourCutoff . "\n";
+    echo "hour cutoff: " . $hourCutoffInt . "\n";
     echo "board: " . $board . "\n";
     echo $sql;
     return;
   }
 
-  $pdo->prepare($sql)->execute(array($board, $hourCutoff));
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':hourcutoff', $hourCutoffInt, PDO::PARAM_INT);
+  $stmt->bindValue(':boardid', $board, PDO::PARAM_STR);
+  $stmt->execute();
 }
 
 function trimAllData($pdo, $hourCutoff) {
-  $sql = "delete from messages where (" . getSqlTimeSinceCreationHours() . ") > ? ";
+  $sql = "delete from messages where (" . getSqlTimeSinceCreationHours() . ") > :hourcutoff ";
+  $hourCutoffInt = intval($hourCutoff);
+  
 
   global $debug;
   if ($debug) {
-    echo "hour cutoff: " . $hourCutoff . "\n";
+    echo "hour cutoff: " . $hourCutoffInt . "\n";
     echo $sql;
     return;
   }
 
-  $pdo->prepare($sql)->execute(array($hourCutoff));
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':hourcutoff', $hourCutoffInt, PDO::PARAM_INT);
+  $stmt->execute();
 }
 
 function getSqlTimeSinceCreationHours() {
