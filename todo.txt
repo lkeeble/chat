@@ -1,4 +1,7 @@
 TODO:
+* Beep when there's a new message
+* Beep differently when there's a message sent to you
+* allow private chat with 1 other user
 * Notify board users of new users in the board. 
 
 IDEAS:
