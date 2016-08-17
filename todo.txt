@@ -6,6 +6,9 @@ TODO:
 * Notify board users of new users in the board.
 
 * blog engine 
+* list of books to read
+* todo application
+* secure document store
 
 IDEAS:
 * 
