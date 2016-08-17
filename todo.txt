@@ -10,6 +10,8 @@ TODO:
 * todo application
 * secure document store
 
+* write a book
+
 IDEAS:
 * 
 
