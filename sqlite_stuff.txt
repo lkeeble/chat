@@ -9,4 +9,7 @@ sqlite> create table messages(BoardID text collate nocase, ClientID text, Creati
 sqlite> insert into messages (BoardID, ClientID, CreationDate, Data) values ('ef
 12', '1234','2016-08-5 11:24:00', '{"text" : "some data"}');
 sqlite> select * from messages;
+
+sqlite> create table boardmembers (BoardID text collate nocase, ClientID text, H
+andle text, LastActivity datetime);
    
