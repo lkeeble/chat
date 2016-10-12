@@ -229,9 +229,16 @@
   function getBoardMemberDataSuccess(data, status) {
     var handlesArr = data.handles;
     
+    $boardMembersDiv.empty();   
     for (var i = 0; i < handlesArr.length; i++) {
       appendBoardMember(handlesArr[i]);      
     }
+  }
+  
+  function appendBoardMember(handleStr) {
+    var $handleDiv = $('<div><span class="handle">' + handleStr + '</span></div><br>');
+    $handleDiv.find(".handle").css('color', getHexColor(handle));
+    $boardMembersDiv.append($handleDiv);
   }
   
   function getBoardMemberDataError(jqXHR, status, error) {
@@ -297,12 +304,6 @@
     var $messageDiv = $('<div>' + messageText + '</div><br>');
     $messageDiv.find(".handle").css('color', getHexColor(handle));
     $messagesDiv.append($messageDiv);
-  }
-  
-  function appendBoardMember(handleStr) {
-    var $handleDiv = $('<div><span class="handle">' + handleStr + '</span></div><br>');
-    $handleDiv.find(".handle").css('color', getHexColor(handle));
-    $boardMembersDiv.append($handleDiv);
   }
   
   function clearAllMessagesOnClient() {
@@ -372,8 +373,10 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <div id="messagesDiv"></div>
-      <div id="boardMembersDiv"></div>
+      <div id="wrapper">
+        <div id="messagesDiv"></div>
+        <div id="boardMembersDiv"></div>
+      </div>
 
       <div id="boardGroup">
         <strong>Board:</strong>  

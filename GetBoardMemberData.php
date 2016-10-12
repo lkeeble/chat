@@ -22,7 +22,7 @@ try {
 }
 
 function getBoardMemberData($pdo, $boardID) {
-  $beginDate = gmdate("c", strtotime("-10 minutes"));
+  $beginDate = gmdate("c", strtotime("-10 seconds"));
   $sql = "select Handle from BoardMembers where boardid = ? and LastActivity > ? order by Handle desc";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array($boardID, $beginDate));
