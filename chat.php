@@ -260,7 +260,7 @@
     type: "GET",
     url: "GetData.php",
     dataType: "json",
-    data: {BoardID : $('#boardID').val(), ClientID : $('#clientID').val(), BeginDate : otherClientMessageLatestDate},
+    data: {BoardID : $('#boardID').val(), ClientID : $('#clientID').val(), handle : $handle, BeginDate : otherClientMessageLatestDate},
     success : getMessagesSuccess,
     error : getMessagesError
     });

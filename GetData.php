@@ -6,6 +6,7 @@ header('Content-Type: application/json;charset=utf-8');
 
 try {
   $boardID = $_GET["BoardID"];
+  $handle = $_GET["handle"];
   $clientID = NULL;
   $beginDate = NULL;
   
@@ -18,6 +19,10 @@ try {
   }
   
   $pdo = getPDO();
+  
+  // Keep track of who's in which board.
+  insertOrUpdateBoardMember($pdo, $boardID, $clientID, $handle);
+
   if ($clientID === NULL) {
     $data = getAllMessages($pdo, $boardID);
   } else {
@@ -34,6 +39,41 @@ try {
   $retArr = array('status' => 'error', 
                   'message' => $e->getMessage());
   echo json_encode($retArr);
+}
+
+function insertOrUpdateBoardMember($pdo, $boardID, $clientID, $handle) {
+  if (boardMemberExists($pdo, $boardID, $clientID)) {
+    updateBoardMember($pdo, $boardID, $clientID, $handle);
+  }
+  else
+  {
+    insertBoardMember($pdo, $boardID, $clientID, $handle);    
+  }
+}
+
+function boardMemberExists($pdo, $boardID, $clientID) {
+  $sql = "select count(*) from BoardMembers where boardid = ? and clientid = ?";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array($boardID, $clientID));
+  $rowCount = $stmt->fetchColumn();
+  
+  echo "rowcount: " . $rowCount;
+  
+  return $rowCount > 0;
+}
+
+function insertBoardMember($pdo, $boardID, $clientID, $handle) {
+  $sql = "insert into BoardMembers (boardid, clientid, handle, lastActivity) values (?,?,?,?)";
+  $stmt = $pdo->prepare($sql);
+  $lastActivity = date("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
+  $stmt->execute(array($boardID, $clientID, $handle, $lastActivity));
+}
+
+function updateBoardMember($pdo, $boardID, $clientID, $handle) {
+  $sql = "update BoardMembers set handle = ?, lastActivity = ? where boardID = ? and clientID = ?";
+  $stmt = $pdo->prepare($sql);
+  $lastActivity = date("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
+  $stmt->execute(array($handle, $lastActivity, $boardID, $clientID));
 }
 
 function getMessagesFromOtherClients($pdo, $boardID, $clientID, $beginDate) {

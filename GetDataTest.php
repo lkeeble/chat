@@ -8,7 +8,11 @@
     </tr>
     <tr>
       <td>Client ID:</td>
-      <td><input type="text" name="ClientID"></td>
+      <td><input type="text" name="ClientID"size="50"></td>
+    </tr>
+    <tr>
+      <td>handle:</td>
+      <td><input type="text" name="handle"></td>
     </tr>
     <tr>
       <td>Begin Date:</td>
