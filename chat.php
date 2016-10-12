@@ -152,11 +152,11 @@
   function getAllMessages() {
       $.ajax({
         type: "GET",
-        url: "GetData.php",
+        url: "GetMessageData.php",
         dataType: "json",
-        data: {BoardID : $('#boardID').val()},
-        success : getMessagesSuccess,
-        error : getMessagesError
+        data: {BoardID : $('#boardID').val(), handle : $handle.val()},
+        success : getAllMessagesSuccess,
+        error : getAllMessagesError
       });
   }
   
@@ -216,6 +216,29 @@
     scrollDown();
   }
   
+  function getMessagesError(jqXHR, status, error) {
+    alert('ajax getMessagesFromOtherClients() call failed, status: ' + status);
+  }
+  
+  function getMessagesFromOtherClients() {
+    $.ajax({
+    type: "GET",
+    url: "GetMessageData.php",
+    dataType: "json",
+    data: {BoardID : $('#boardID').val(), ClientID : $('#clientID').val(), handle : $handle.val(), BeginDate : otherClientMessageLatestDate},
+    success : getMessagesSuccess,
+    error : getMessagesError
+    });
+  }
+  
+  function getAllMessagesSuccess(data, status) {
+    getMessagesSuccess(data, status);
+  }
+  
+  function getAllMessagesError() {
+    alert('ajax getAllMessages() call failed, status: ' + status);
+  }
+  
   function fromISODateStrToLocalDateStr(isoDateStr) {
     var d = new Date(isoDateStr);
     return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + forceTwoDigits(d.getHours()) + ":" + forceTwoDigits(d.getMinutes()) + ":" + forceTwoDigits(d.getSeconds());       
@@ -249,21 +272,6 @@
   
   function clearAllMessagesOnClient() {
     $messagesDiv.empty();
-  }
-    
-  function getMessagesError(jqXHR, status, error) {
-    alert('ajax getMessagesFromOtherClients() call failed, status: ' + status);
-  }
-  
-  function getMessagesFromOtherClients() {
-    $.ajax({
-    type: "GET",
-    url: "GetData.php",
-    dataType: "json",
-    data: {BoardID : $('#boardID').val(), ClientID : $('#clientID').val(), handle : $handle, BeginDate : otherClientMessageLatestDate},
-    success : getMessagesSuccess,
-    error : getMessagesError
-    });
   }
     
   function submitFormWithBoardName() {
