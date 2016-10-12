@@ -34,12 +34,26 @@ body {
 
 #messagesDiv {
   min-height: 200px;
-  min-width: 400px;
+  min-width: 100px;
   height: 400px;
-  width: 98%;  
+  width: 58%;  
   padding: 5px;
+  float: left;
   /* resize: none; */
   overflow:auto;
+  border: 2px solid black;
+  background-color:#fdfdfd;
+  font-size: 0.8em;
+}
+
+#boardMembersDiv {
+  min-height: 200px;
+  min-width: 100px;
+  height: 400px;
+  width: 40%;
+  padding: 5px;
+  margin-left: 10px;
+  overflow: auto;
   border: 2px solid black;
   background-color:#fdfdfd;
   font-size: 0.8em;

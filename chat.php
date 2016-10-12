@@ -23,7 +23,7 @@
       <title>Chat</title>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
       <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
-      <link rel="stylesheet" href="chat.css?v=2">
+      <link rel="stylesheet" href="chat.css?v=<?php echo time();?>">
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
 <script>
   $(chat);
@@ -31,6 +31,7 @@
   function chat()	{
   var debug = true;
   var $messagesDiv = $('#messagesDiv');
+  var $boardMembersDiv = $('#boardMembersDiv');
   var $chatTextarea = $('#chatTextarea');
   var $handle = $('#handle');
   var $boardGroup = $('#boardGroup');
@@ -79,11 +80,14 @@
     var nowISO = (new Date()).toISOString(); 
     otherClientMessageLatestDate = nowISO;
     var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
+    var reloadBoardMemberInterval = setInterval(getBoardMemberData, 5000);
     $chatTextarea.focus();
   }
   
   function setMessagesHeight() {
-    $messagesDiv.height($(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100);
+    var height = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
+    $messagesDiv.height(height);
+    $boardMembersDiv.height(height);
   }
   
   $(window).resize(function() {
@@ -193,6 +197,8 @@
     }
     
     var messagesArr = [];
+    // Last element in the array is not a message, it's the creation date of the final message.
+    // That's why we loop until less than messagesStrArr.length -1.
     for (var i = 0; i < messagesStrArr.length - 1; i++) {
       var message = JSON.parse(messagesStrArr[i]);
       messagesArr.push(message);
@@ -220,6 +226,18 @@
     alert('ajax getMessagesFromOtherClients() call failed, status: ' + status);
   }
   
+  function getBoardMemberDataSuccess(data, status) {
+    var handlesArr = data.handles;
+    
+    for (var i = 0; i < handlesArr.length; i++) {
+      appendBoardMember(handlesArr[i]);      
+    }
+  }
+  
+  function getBoardMemberDataError(jqXHR, status, error) {
+    alert('ajax getBoardMemberData() call failed, status: ' + status);
+  }
+  
   function getMessagesFromOtherClients() {
     $.ajax({
     type: "GET",
@@ -228,6 +246,17 @@
     data: {BoardID : $('#boardID').val(), ClientID : $('#clientID').val(), handle : $handle.val(), BeginDate : otherClientMessageLatestDate},
     success : getMessagesSuccess,
     error : getMessagesError
+    });
+  }
+  
+  function getBoardMemberData() {
+    $.ajax({
+    type: "GET",
+    url: "GetBoardMemberData.php",
+    dataType: "json",
+    data: {BoardID : $('#boardID').val()},
+    success : getBoardMemberDataSuccess,
+    error : getBoardMemberDataError
     });
   }
   
@@ -268,6 +297,12 @@
     var $messageDiv = $('<div>' + messageText + '</div><br>');
     $messageDiv.find(".handle").css('color', getHexColor(handle));
     $messagesDiv.append($messageDiv);
+  }
+  
+  function appendBoardMember(handleStr) {
+    var $handleDiv = $('<div><span class="handle">' + handleStr + '</span></div><br>');
+    $handleDiv.find(".handle").css('color', getHexColor(handle));
+    $boardMembersDiv.append($handleDiv);
   }
   
   function clearAllMessagesOnClient() {
@@ -338,6 +373,7 @@
   <body>
     <form id="mainForm" method="post" action="scribble.php">
       <div id="messagesDiv"></div>
+      <div id="boardMembersDiv"></div>
 
       <div id="boardGroup">
         <strong>Board:</strong>  
