@@ -20,13 +20,13 @@ try {
   
   $pdo = getPDO();
   
-  // Keep track of who's in which board.
-  insertOrUpdateBoardMember($pdo, $boardID, $clientID, $handle);
-
   if ($clientID === NULL) {
     $data = getAllMessages($pdo, $boardID);
   } else {
     $data = getMessagesFromOtherClients($pdo, $boardID, $clientID, $beginDate);  
+
+    // Keep track of who's in which board.
+    insertOrUpdateBoardMember($pdo, $boardID, $clientID, $handle);
   }
   
   $retArr = array('status' => 'success',
@@ -57,7 +57,7 @@ function boardMemberExists($pdo, $boardID, $clientID) {
   $stmt->execute(array($boardID, $clientID));
   $rowCount = $stmt->fetchColumn();
   
-  echo "rowcount: " . $rowCount;
+  // echo "rowcount: " . $rowCount;
   
   return $rowCount > 0;
 }
@@ -65,14 +65,14 @@ function boardMemberExists($pdo, $boardID, $clientID) {
 function insertBoardMember($pdo, $boardID, $clientID, $handle) {
   $sql = "insert into BoardMembers (boardid, clientid, handle, lastActivity) values (?,?,?,?)";
   $stmt = $pdo->prepare($sql);
-  $lastActivity = date("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
+  $lastActivity = gmdate("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
   $stmt->execute(array($boardID, $clientID, $handle, $lastActivity));
 }
 
 function updateBoardMember($pdo, $boardID, $clientID, $handle) {
   $sql = "update BoardMembers set handle = ?, lastActivity = ? where boardID = ? and clientID = ?";
   $stmt = $pdo->prepare($sql);
-  $lastActivity = date("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
+  $lastActivity = gmdate("c"); //  http://stackoverflow.com/questions/1986586/get-current-iso8601-date-time-stamp
   $stmt->execute(array($handle, $lastActivity, $boardID, $clientID));
 }
 

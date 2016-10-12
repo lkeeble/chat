@@ -1,6 +1,6 @@
 <html>
 <body>
-<form action="GetData.php" method="GET">
+<form action="GetMessageData.php" method="GET">
   <table>
     <tr>
       <td>Board ID:</td>
