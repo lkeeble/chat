@@ -45,6 +45,7 @@ body {
 #messagesDiv div {
   display: inline-block;
   height: auto;
+  margin-left: 2px;
 }
 
 #boardMembersDiv {
@@ -63,6 +64,7 @@ body {
   display: inline-block;
   overflow: auto; /* show scrollbars when content too much */
   height: auto;
+  margin-left: 2px;
 }
 
 #chatTextarea {

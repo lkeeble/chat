@@ -1,10 +1,14 @@
 TODO:
-* To control disk space usage, purge messages older then 2 days in a given board
-* Email invite/link to a user to a given chat board. 
 * allow private chat with another user
 
-Deferred
+DEFER:
+* Beeping upon new message
 * Beep differently when there's a message sent to you
+* Email invite/link to a user to a given chat board. 
+
+DONE:
+* To control disk space usage, purge messages older then 2 days in a given board
+- ended up purging stuff older than 1 day.
 
 
 * blog engine 
