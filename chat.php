@@ -86,10 +86,12 @@
   
   function setMessagesHeight() {
     // return;
-    var height = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
+    var messagesHeight = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
+    var boardMembersHeight = messagesHeight - $('#peopleInRoomTd').height(); 
     //$("#topTable").height(height);
-    $messagesDiv.height(height);
-    $('#boardMembersTable').height(height);
+    $messagesDiv.height(messagesHeight);
+    $('#boardMembersTable').height(messagesHeight);
+    $('#boardMembersDiv').height(boardMembersHeight);
     scrollDown();
   }
   
@@ -376,16 +378,16 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <table id="topTable" width="98%" border="0px">
+      <table id="topTable" width="100%" border="0px">
         <tr>
           <td>
             <div id="messagesDiv"></div>
           </td>
           <td width="10px">&nbsp;</td>
           <td width="100px">
-            <table id="boardMembersTable">
-              <tr><td><strong>people in the room</strong></td></tr>
-              <tr><td><div id="boardMembersDiv"></div></td></tr>
+            <table id="boardMembersTable" border="0px">
+              <tr><td id="peopleInRoomTd"><strong>people in the room</strong></td></tr>
+              <tr><td height="100%"><div id="boardMembersDiv"></div></td></tr>
             </table>
           </td>
         </tr>

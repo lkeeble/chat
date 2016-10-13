@@ -42,9 +42,16 @@ body {
   font-size: 0.8em;
 }
 
-#boardMembersTable {
+#messagesDiv div {
+  display: inline-block;
+  height: auto;
+}
+
+#boardMembersDiv {
   min-height: 200px;
   width: 200px;
+  /* padding: 5px; */
+  /* resize: none; */
   overflow: auto; /* show scrollbars when content too much */
   border: 2px solid black;
   background-color:#fdfdfd;
@@ -54,12 +61,7 @@ body {
 #boardMembersDiv div {
   /* padding: 2px; */
   display: inline-block;
-  height: auto;
-}
-
-#messagesDiv div {
-  /* padding: 2px; */
-  display: inline-block;
+  overflow: auto; /* show scrollbars when content too much */
   height: auto;
 }
 
