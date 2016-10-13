@@ -242,7 +242,7 @@
   
   function appendBoardMember(handleStr) {
     var $handleDiv = $('<div><span class="handle">' + handleStr + '</span></div><br>');
-    $handleDiv.find(".handle").css('color', getHexColor(handle));
+    $handleDiv.find(".handle").css('color', getHexColor(handleStr));
     $boardMembersDiv.append($handleDiv);
   }
   
