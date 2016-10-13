@@ -80,6 +80,7 @@
     var nowISO = (new Date()).toISOString(); 
     otherClientMessageLatestDate = nowISO;
     var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
+    getBoardMemberData();
     var reloadBoardMemberInterval = setInterval(getBoardMemberData, 5000);
     $chatTextarea.focus();
   }
@@ -238,6 +239,7 @@
     for (var i = 0; i < handlesArr.length; i++) {
       appendBoardMember(handlesArr[i]);      
     }
+    $('#peopleInRoom').text(handlesArr.length);
   }
   
   function appendBoardMember(handleStr) {
@@ -386,7 +388,7 @@
           <td width="10px">&nbsp;</td>
           <td width="100px">
             <table id="boardMembersTable" border="0px">
-              <tr><td id="peopleInRoomTd"><strong>people in the room</strong></td></tr>
+              <tr><td id="peopleInRoomTd"><strong>People in room: <span id="peopleInRoom"></span></strong></td></tr>
               <tr><td height="100%"><div id="boardMembersDiv"></div></td></tr>
             </table>
           </td>
