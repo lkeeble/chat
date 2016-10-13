@@ -85,10 +85,11 @@
   }
   
   function setMessagesHeight() {
+    // return;
     var height = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
-    $("#topTable").height(height);
-    // $messagesDiv.height(height);
-    // $boardMembersDiv.height(height);
+    //$("#topTable").height(height);
+    $messagesDiv.height(height);
+    $('#boardMembersTable').height(height);
   }
   
   $(window).resize(function() {
@@ -374,14 +375,14 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <table id="topTable" width="98%">
+      <table id="topTable" width="98%" border="1px">
         <tr>
-          <td width="100%" height="100%">
+          <td>
             <div id="messagesDiv"></div>
           </td>
           <td width="10px">&nbsp;</td>
           <td width="100px">
-            <table id="boardMembersTable" width="100%" height="100%">
+            <table id="boardMembersTable">
               <tr><td><strong>people in the room</strong></td></tr>
               <tr><td><div id="boardMembersDiv"></div></td></tr>
             </table>
