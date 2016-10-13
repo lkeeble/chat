@@ -1,9 +1,5 @@
 TODO:
-* Maintain list of who's in a given board
-* Notify board users of new users in the board.
-* Notify board users of when a user leaves a board.
-* Beep when there's a new message or change/highlight browser tab image
-* once a day, purge all boards if they haven't been used in X hours
+* To control disk space usage, purge all boards if they haven't been used in X hours
 * Beep differently when there's a message sent to you
 * allow private chat with another user
 
