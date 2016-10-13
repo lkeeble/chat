@@ -80,6 +80,7 @@
     var nowISO = (new Date()).toISOString(); 
     otherClientMessageLatestDate = nowISO;
     var reloadOtherClientInterval = setInterval(getMessagesFromOtherClients, 1000);
+    deleteOldMessages();
     getBoardMemberData();
     var reloadBoardMemberInterval = setInterval(getBoardMemberData, 5000);
     $chatTextarea.focus();
@@ -168,6 +169,24 @@
         success : getAllMessagesSuccess,
         error : getAllMessagesError
       });
+  }
+  
+  function deleteOldMessages() {
+      $.ajax({
+        type: "GET",
+        url: "DeleteOldMessages.php",
+        dataType: "json",
+        data: {BoardID : $('#boardID').val()},
+        success : deleteOldMessagesSuccess,
+        error : deleteOldMessagesError
+      });
+  }
+  
+  function deleteOldMessagesSuccess(data, status) {
+  }
+  
+  function deleteOldMessagesError(jqXHR, status, error) {
+    alert('ajax deleteOldMessages() call failed, status: ' + status);    
   }
   
   function clearAllMessagesOnServer() {
