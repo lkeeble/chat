@@ -43,6 +43,7 @@ body {
 }
 
 #boardMembersTable {
+  min-height: 200px;
   width: 200px;
   overflow: auto; /* show scrollbars when content too much */
   border: 2px solid black;

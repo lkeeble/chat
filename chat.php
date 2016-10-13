@@ -90,6 +90,7 @@
     //$("#topTable").height(height);
     $messagesDiv.height(height);
     $('#boardMembersTable').height(height);
+    scrollDown();
   }
   
   $(window).resize(function() {
@@ -375,7 +376,7 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <table id="topTable" width="98%" border="1px">
+      <table id="topTable" width="98%" border="0px">
         <tr>
           <td>
             <div id="messagesDiv"></div>
