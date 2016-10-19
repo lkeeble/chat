@@ -11,12 +11,11 @@ DONE:
 - ended up purging stuff older than 1 day.
 
 
+* personal todo application, with ability to share, other family members can add to it
+* family calendar/sharing
 * blog engine 
 * list of books to read
-* todo application
 * secure document store
-
-* write a book
 
 IDEAS:
 * 
