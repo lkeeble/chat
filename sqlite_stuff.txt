@@ -1,5 +1,8 @@
 How to create the chat database for the first time
 --------------------------------------------------
+10/15/2017 - nfshost.com hosting - the chat.db file AND its containing folder /chat need to have writable permissions by user. 
+Otherwise, writes to the database are prevented.
+
 c:\sqlite>sqlite3 chat.db
 SQLite version 3.13.0 2016-05-18 10:57:30
 Enter ".help" for usage hints.
