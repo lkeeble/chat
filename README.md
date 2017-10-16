@@ -8,6 +8,7 @@
 * To get started, do a pull, then bring up chat.htm in a browser. 
 
 ### TODO
+* Notify user with beep or flash or tab icon flashing/color that there's a new message
 * Add emoticons
 
 
