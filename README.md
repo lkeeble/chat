@@ -9,6 +9,7 @@
 
 ### TODO
 * Notify user with beep or flash or tab icon flashing/color that there's a new message
+e.g. http://heyman.info/2010/sep/30/jquery-title-alert/
 * Add emoticons
 
 
