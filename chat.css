@@ -44,7 +44,7 @@ body {
 
 #messagesDiv div {
   display: inline-block;
-  height: auto;
+  height: 24px;
   margin-left: 2px;
 }
 

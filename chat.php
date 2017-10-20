@@ -58,7 +58,7 @@
   function emojify(text) {
     var smileyRegex = /:\)/g;
     return text.replace(smileyRegex, function(textEmoticon) {
-     return '<img src="icons8-Happy-48.png" height="24" width="24" style="vertical-align:middle"></img>';  
+     return '<img src="icons8-Happy-48.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
     });
   }
 
@@ -436,6 +436,12 @@
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
       </div>    
       <textarea rows="3" id="chatTextarea"></textarea>
+      
+      <div id="icons8Link" style="font-size: 10pt; padding-bottom: 10px; padding-top: 10px;">
+      <a href="https://icons8.com/android-L">Free icons by Icons8</a>
+      </div>
+    
     </form>
+    
   </body>
 </html>
