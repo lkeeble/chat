@@ -56,10 +56,17 @@
   
   // Icons from Icons8.com.
   function emojify(text) {
-    var smileyRegex = /:\)/g;
-    return text.replace(smileyRegex, function(textEmoticon) {
-     return '<img src="icons8-Happy-48.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    var happyRegex = /:\)/g;
+    text = text.replace(happyRegex, function(textEmoticon) {
+     return '<img src="Happy_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
     });
+    
+    var sadRegex = /:\(/g;
+    text = text.replace(sadRegex, function(textEmoticon) {
+     return '<img src="Sad_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    });
+    
+    return text;
   }
 
   function getHashCode(str) {
