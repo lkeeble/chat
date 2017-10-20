@@ -81,6 +81,11 @@
      return '<img src="Wink_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
     });
 
+    var tongueOutRegex = /:p/g;
+    text = text.replace(tongueOutRegex, function(textEmoticon) {
+     return '<img src="TongueOut_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    });
+
     return text;
   }
 
