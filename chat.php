@@ -53,6 +53,14 @@
           return '<a href="' + url + '" target="_blank">' + url + '</a>';
       });
   }
+  
+  // Icons from Icons8.com.
+  function emojify(text) {
+    var smileyRegex = /:\)/g;
+    return text.replace(smileyRegex, function(textEmoticon) {
+     return '<img src="icons8-Happy-48.png" height="24" width="24" style="vertical-align:middle"></img>';  
+    });
+  }
 
   function getHashCode(str) {
     var hash = 0, i, chr, len;
@@ -323,6 +331,7 @@
   function appendMessage(message) {
     var text = message.text;
     text = linkify(text);
+    text = emojify(text);
     var handle = message.handle;
     var messageDate = message.nowISO;
     var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
