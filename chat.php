@@ -66,6 +66,21 @@
      return '<img src="Sad_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
     });
     
+    var lolRegex = /:D/g;
+    text = text.replace(lolRegex, function(textEmoticon) {
+     return '<img src="LOL_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    });
+
+    var neutralRegex = /:\|/g;
+    text = text.replace(neutralRegex, function(textEmoticon) {
+     return '<img src="Neutral_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    });
+
+    var winkRegex = /;\)/g;
+    text = text.replace(winkRegex, function(textEmoticon) {
+     return '<img src="Wink_48px.png" height="24" width="24" style="vertical-align:text-bottom;" ></img>';  
+    });
+
     return text;
   }
 
