@@ -25,11 +25,20 @@ body {
 #yourHandleGroup, #instructions {
   margin-top: 10px;
   margin-bottom: 10px;
+  white-space: nowrap;
 }
 
 #btnClear {
-  margin-left: 200px;
+  margin-left: 20px;
   display: inline-block;
+}
+
+#boardID {
+	width: 150px;
+}
+
+#handle {
+	width: 140px;
 }
 
 #messagesDiv {
@@ -39,18 +48,23 @@ body {
   overflow: auto; /* show scrollbars when content too much */
   border: 2px solid black;
   background-color:#fdfdfd;
-  font-size: 0.8em;
 }
 
-#messagesDiv div {
-  display: inline-block;
-  height: 24px;
-  margin-left: 2px;
+.messageDate {
+	font-size: 0.55em;
+}
+
+.messageDiv {
+	border-bottom: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	margin-left: 2px;
+  font-size: 0.8em;
 }
 
 #boardMembersDiv {
   min-height: 200px;
-  width: 200px;
+  /* width: 200px;*/
   /* padding: 5px; */
   /* resize: none; */
   overflow: auto; /* show scrollbars when content too much */
@@ -68,11 +82,12 @@ body {
 }
 
 #chatTextarea {
-  width: 98%;
+  width: 90%;
   vertical-align: top;
   resize: none;
   border: 5px solid yellow; 
   padding: 5px;
+  margin-right: 10px;
   font-family: "Arial";
 }
 

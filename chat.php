@@ -20,6 +20,7 @@
 <html>
   <head>
       <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Chat</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
       <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -39,7 +40,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
-  var promptMessage = '1. Enter a message board name above and click "Go". \n2. Pick a nickname \n3. Start typing here! Press Enter to post your message.';
+  var promptMessage = '1) Enter room name and handle above, click "Go".\n2) Type message here, press Enter to post';
 
   function log(msg) {
     if (debug) {
@@ -362,8 +363,8 @@
     var handle = message.handle;
     var messageDate = message.nowISO;
     var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
-    var messageText = '(' + messageDateLocal + ') <span class="handle">' + message.handle + '</span>: ' + text;
-    var $messageDiv = $('<div>' + messageText + '</div><br>');
+    var messageText = '<span class="messageDate">' + messageDateLocal + '</span> <br><span class="handle">' + message.handle + '</span>: ' + text;
+    var $messageDiv = $('<div class="messageDiv">' + messageText + '</div>');
     $messageDiv.find(".handle").css('color', getHexColor(handle));
     $messagesDiv.append($messageDiv);
   }
@@ -437,13 +438,13 @@
     <form id="mainForm" method="post" action="scribble.php">
       <table id="topTable" width="100%" border="0px">
         <tr>
-          <td>
+          <td width="90%">
             <div id="messagesDiv"></div>
           </td>
           <td width="10px">&nbsp;</td>
-          <td width="100px">
+          <td width="10%">
             <table id="boardMembersTable" border="0px">
-              <tr><td id="peopleInRoomTd"><strong>People in room: <span id="peopleInRoom"></span></strong></td></tr>
+              <tr><td id="peopleInRoomTd"><strong>People: <span id="peopleInRoom"></span></strong></td></tr>
               <tr><td height="100%"><div id="boardMembersDiv"></div></td></tr>
             </table>
           </td>
@@ -451,18 +452,18 @@
       </table>
 
       <div id="boardGroup">
-        <strong>Board:</strong>  
+        <strong>Room:</strong>  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
-        <button type="button" id="btnClear">Clear all messages</button>  
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     
       <div id="yourHandleGroup">
-        <strong>Nickname:</strong>
+        <strong>Handle:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
+        <button type="button" id="btnClear">Clear all messages</button>  
       </div>    
-      <textarea rows="3" id="chatTextarea"></textarea>
+      <textarea rows="3" id="chatTextarea" ></textarea>
       
       <div id="icons8Link" style="font-size: 10pt; padding-bottom: 10px; padding-top: 10px;">
       <a href="https://icons8.com/android-L">Free icons by Icons8</a>
