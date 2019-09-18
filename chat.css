@@ -64,6 +64,7 @@ body {
 
 #boardMembersDiv {
   min-height: 200px;
+  width: 120px;
   /* width: 200px;*/
   /* padding: 5px; */
   /* resize: none; */

@@ -439,12 +439,17 @@
       <table id="topTable" width="100%" border="0px">
         <tr>
           <td width="90%">
-            <div id="messagesDiv"></div>
+            <table id="messagesTable" width="100%">
+              <tr><td style="text-align: center;"><strong>Messages</strong></td></tr>
+              <tr><td>
+                <div id="messagesDiv"></div>
+              </td></tr>
+            </table>
           </td>
           <td width="10px">&nbsp;</td>
           <td width="10%">
             <table id="boardMembersTable" border="0px">
-              <tr><td id="peopleInRoomTd"><strong>People: <span id="peopleInRoom"></span></strong></td></tr>
+              <tr><td><strong>Occupants<span id="peopleInRoom" style="display: none;"></span></strong></td></tr>
               <tr><td height="100%"><div id="boardMembersDiv"></div></td></tr>
             </table>
           </td>
@@ -459,9 +464,9 @@
       </div>
     
       <div id="yourHandleGroup">
-        <strong>Handle:</strong>
+        <strong>Nickname:</strong>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
-        <button type="button" id="btnClear">Clear all messages</button>  
+        <button type="button" id="btnClear">Clear Messages</button>  
       </div>    
       <textarea rows="3" id="chatTextarea" ></textarea>
       
