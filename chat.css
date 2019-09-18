@@ -38,13 +38,13 @@ body {
 }
 
 .messageDate {
-	font-size: 0.55em;
+	font-size: 10px;
 }
 
 .messageDiv {
-	border-bottom: 1px;
+  border-bottom: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: black;
+	border-bottom-color: lightgray;
 	margin-left: 2px;
   font-size: 0.8em;
 }

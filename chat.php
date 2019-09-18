@@ -363,7 +363,7 @@
     var handle = message.handle;
     var messageDate = message.nowISO;
     var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
-    var messageText = '<span class="messageDate">' + messageDateLocal + '</span> <br><span class="handle">' + message.handle + '</span>: ' + text;
+    var messageText = '<span class="messageDate">' + messageDateLocal + '</span> <span class="handle">' + message.handle + '</span>: ' + text;
     var $messageDiv = $('<div class="messageDiv">' + messageText + '</div>');
     $messageDiv.find(".handle").css('color', getHexColor(handle));
     $messagesDiv.append($messageDiv);
