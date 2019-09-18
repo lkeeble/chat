@@ -40,7 +40,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
-  var promptMessage = '1) Enter room name and handle above, click "Go".\n2) Type message here, press Enter to post';
+  var promptMessage = 'Type your message here. Press <Enter> to post your message!';
 
   function log(msg) {
     if (debug) {
@@ -110,7 +110,7 @@
   }
     
   function initChat() {
-    setMessagesHeight();
+    // setMessagesHeight();
     initPromptMessage();
     getAllMessages();
     var nowISO = (new Date()).toISOString(); 
@@ -122,20 +122,20 @@
     $chatTextarea.focus();
   }
   
-  function setMessagesHeight() {
-    // return;
-    var messagesHeight = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
-    var boardMembersHeight = messagesHeight - $('#peopleInRoomTd').height(); 
-    //$("#topTable").height(height);
-    $messagesDiv.height(messagesHeight);
-    $('#boardMembersTable').height(messagesHeight);
-    $('#boardMembersDiv').height(boardMembersHeight);
-    scrollDown();
-  }
+  // function setMessagesHeight() {
+  //   // return;
+  //   var messagesHeight = $(window).height() - $boardGroup.height() - $yourHandleGroup.height() - $chatTextarea.height() - 100;
+  //   var boardMembersHeight = messagesHeight - $('#peopleInRoomTd').height(); 
+  //   //$("#topTable").height(height);
+  //   $messagesDiv.height(messagesHeight);
+  //   $('#boardMembersTable').height(messagesHeight);
+  //   $('#boardMembersDiv').height(boardMembersHeight);
+  //   scrollDown();
+  // }
   
-  $(window).resize(function() {
-    setMessagesHeight();
-  })
+  // $(window).resize(function() {
+  //   setMessagesHeight();
+  // })
   
   function initPromptMessage() {
     $chatTextarea.val(promptMessage);
@@ -436,41 +436,48 @@
 
   <body>
     <form id="mainForm" method="post" action="scribble.php">
-      <table id="topTable" width="100%" border="0px">
-        <tr>
-          <td width="90%">
-            <table id="messagesTable" width="100%">
-              <tr><td style="text-align: center;"><strong>Messages</strong></td></tr>
-              <tr><td>
-                <div id="messagesDiv"></div>
-              </td></tr>
-            </table>
-          </td>
-          <td width="10px">&nbsp;</td>
-          <td width="10%">
-            <table id="boardMembersTable" border="0px">
-              <tr><td><strong>Occupants<span id="peopleInRoom" style="display: none;"></span></strong></td></tr>
-              <tr><td height="100%"><div id="boardMembersDiv"></div></td></tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+
+      <div id="yourHandleGroup">
+        Your Nickname:
+        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
+      </div>    
 
       <div id="boardGroup">
-        <strong>Room:</strong>  
+        Your Chatroom:  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
-        <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
+        <button type="button" id="btnSetBoard">Update</button> <?php // type="button" makes the button not submit the form ?>
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     
-      <div id="yourHandleGroup">
-        <strong>Nickname:</strong>
-        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
-        <button type="button" id="btnClear">Clear Messages</button>  
-      </div>    
-      <textarea rows="3" id="chatTextarea" ></textarea>
+      <table id="topTable" width="100%" border="0px">
+        <tr>
+          <td style="width:90%;min-width: 200px;">
+            <strong>Messages</strong>
+          </td>
+          <td width="10px">&nbsp;</td>
+          <td>
+            <strong>Occupants</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="messagesDiv"></div>
+          </td>
+          <td></td>
+          <td>
+            <div id="boardMembersDiv"></div></td></tr>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"><textarea rows="3" id="chatTextarea" style="min-width: 240px; width: 96%; margin-left: 3px; max-width: 700px;"></textarea></td>
+        </tr>
+        <tr>
+          <td><button type="button" id="btnClear" style="margin-left: 3px;">Clear ALL Messages</button></td>
+        </tr>
+      </table>
+
       
-      <div id="icons8Link" style="font-size: 10pt; padding-bottom: 10px; padding-top: 10px;">
+      <div id="icons8Link" style="font-size: 10pt; padding-bottom: 10px; padding-top: 10px; margin-left: 10px;">
       <a href="https://icons8.com/android-L">Free icons by Icons8</a>
       </div>
     
