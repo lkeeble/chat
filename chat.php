@@ -452,7 +452,7 @@
       <table id="topTable" width="100%" border="0px">
         <tr>
           <td style="width:90%;min-width: 200px;">
-            <strong>Messages</strong>
+            <strong>Messages for Chatroom "<?php echo $board; ?>"</strong>
           </td>
           <td width="10px">&nbsp;</td>
           <td>
