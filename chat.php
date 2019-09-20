@@ -444,12 +444,12 @@
 
       <div id="yourHandleGroup">
         <span style="font-size: 11pt;">Your Nickname:</span>
-        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
+        <input type="text" id="handle" name="handle" value="<?php echo $handle;?>" style="width: 150px;"></input>
       </div>    
 
       <div id="boardGroup">
         <span style="font-size: 11pt;">Your Chatroom:</span>  
-        <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
+        <input type="text" id="boardID" name="board" value="<?php echo $board;?>" style="width: 150px;">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
