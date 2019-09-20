@@ -40,7 +40,7 @@
   var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
   // green, blue, black, red, orange, purple, fuchsia, brown, grey, tan
   var handleColors = ["#00ff00", "#0000ff", "#000000", "#ff0000", "#e67e22", "#8e44ad", "#ff0080", "#8B4513", "#808080", "#D2B48C"];
-  var promptMessage = 'Type your message here. Press <Enter> to post your message!';
+  var promptMessage = 'Type here, press <Enter> to post your message.';
 
   function log(msg) {
     if (debug) {
@@ -342,6 +342,11 @@
     return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + forceTwoDigits(d.getHours()) + ":" + forceTwoDigits(d.getMinutes()) + ":" + forceTwoDigits(d.getSeconds());       
   }
   
+  function fromISODateStrToLocalTimeStr(isoDateStr) {
+    var d = new Date(isoDateStr);
+    return forceTwoDigits(d.getHours()) + ":" + forceTwoDigits(d.getMinutes()) + ":" + forceTwoDigits(d.getSeconds());       
+  }
+
   function forceTwoDigits(i)
   {
     if (i < 10) {
@@ -362,8 +367,8 @@
     text = emojify(text);
     var handle = message.handle;
     var messageDate = message.nowISO;
-    var messageDateLocal = fromISODateStrToLocalDateStr(messageDate);
-    var messageText = '<span class="messageDate">' + messageDateLocal + '</span> <span class="handle">' + message.handle + '</span>: ' + text;
+    var messageDateLocal = fromISODateStrToLocalTimeStr(messageDate);
+    var messageText = '(<span class="messageDate">' + messageDateLocal + '</span>) <span class="handle">' + message.handle + '</span>: ' + text;
     var $messageDiv = $('<div class="messageDiv">' + messageText + '</div>');
     $messageDiv.find(".handle").css('color', getHexColor(handle));
     $messagesDiv.append($messageDiv);
@@ -445,7 +450,7 @@
       <div id="boardGroup">
         Your Chatroom:  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
-        <button type="button" id="btnSetBoard">Update</button> <?php // type="button" makes the button not submit the form ?>
+        <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
       </div>
     
