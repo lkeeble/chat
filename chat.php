@@ -443,12 +443,12 @@
     <form id="mainForm" method="post" action="scribble.php">
 
       <div id="yourHandleGroup">
-        Your Nickname:
+        <span style="font-size: 11pt;">Your Nickname:</span>
         <input type="text" id="handle" name="handle" value="<?php echo $handle;?>"></input>
       </div>    
 
       <div id="boardGroup">
-        Your Chatroom:  
+        <span style="font-size: 11pt;">Your Chatroom:</span>  
         <input type="text" id="boardID" name="board" value="<?php echo $board;?>">
         <button type="button" id="btnSetBoard">Go</button> <?php // type="button" makes the button not submit the form ?>
         <input type="hidden" id="clientID" name="ClientID" value="<?php echo session_id(); ?>"></input>
@@ -459,7 +459,6 @@
           <td style="width:90%;min-width: 200px;">
             <strong>Messages for Chatroom "<?php echo $board; ?>"</strong>
           </td>
-          <td width="10px">&nbsp;</td>
           <td>
             <strong>Occupants</strong>
           </td>
@@ -468,13 +467,12 @@
           <td>
             <div id="messagesDiv"></div>
           </td>
-          <td></td>
           <td>
             <div id="boardMembersDiv"></div></td></tr>
           </td>
         </tr>
         <tr>
-          <td colspan="3"><textarea rows="3" id="chatTextarea" style="min-width: 240px; width: 96%; margin-left: 3px; max-width: 700px;"></textarea></td>
+          <td colspan="3"><textarea rows="3" id="chatTextarea" style="min-width: 240px; width: 96%; max-width: 700px;"></textarea></td>
         </tr>
         <tr>
           <td><button type="button" id="btnClear" style="margin-left: 3px;">Clear ALL Messages</button></td>
@@ -482,7 +480,7 @@
       </table>
 
       
-      <div id="icons8Link" style="font-size: 10pt; padding-bottom: 10px; padding-top: 10px; margin-left: 10px;">
+      <div id="icons8Link" style="font-size: 8pt; padding-bottom: 10px; padding-top: 10px; margin-left: 10px;">
       <a href="https://icons8.com/android-L">Free icons by Icons8</a>
       </div>
     

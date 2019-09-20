@@ -1,9 +1,17 @@
+/* CSS browser reset */
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
 body {
   background-color: lightblue;
   font-family: "Arial";
 }
 
 #boardGroup {
+    margin-left: 2px;
     margin-top: 10px;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -23,6 +31,7 @@ body {
 }
 
 #yourHandleGroup, #instructions {
+  margin-left: 2px;
   margin-top: 10px;
   margin-bottom: 10px;
   white-space: nowrap;
@@ -37,10 +46,6 @@ body {
   background-color:#fdfdfd;
 }
 
-.messageDate {
-	/*font-size: 10px;*/
-}
-
 .messageDiv {
   border-bottom: 1px;
 	border-bottom-style: solid;
@@ -51,10 +56,7 @@ body {
 
 #boardMembersDiv {
   height: 400px;
-  width: 120px;
-  /* width: 200px;*/
-  /* padding: 5px; */
-  /* resize: none; */
+  min-width: 80px;
   overflow: auto; /* show scrollbars when content too much */
   border: 2px solid black;
   background-color:#fdfdfd;
