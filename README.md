@@ -5,7 +5,7 @@
 
 ### How do I get set up? ###
 * Needs a web server (e.g. apache) with PHP 5.2 or higher and the PHP sqlite3 PDO driver installed.
-* To get started, do a pull, then bring up chat.htm in a browser. 
+* To get started, do a pull, then bring up chat.php in a browser. 
 
 ### TODO
 * Make it work better on mobile devices. 
