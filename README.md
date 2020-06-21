@@ -1,7 +1,7 @@
 # README #
 
 ### What is this repository for? ###
-* Code files for a simple chat utility that does not require a login and does not have tracking of users. The goal is to get away from having to use Facebook messenger and other centralized chat services which do not respect privacy.
+* A simple chat utility that does not require a login and does not have tracking of users. The goal is to get away from having to use Facebook messenger and other centralized chat services which do not respect privacy.
 
 ### How do I get set up? ###
 * Needs a web server (e.g. apache) with PHP 5.2 or higher and the PHP sqlite3 PDO driver installed.
