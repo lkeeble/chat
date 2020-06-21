@@ -8,6 +8,8 @@
 * To get started, do a pull, then bring up chat.htm in a browser. 
 
 ### TODO
+* Make it work better on mobile devices. 
+* Use separate sqlite databases for each chat thread. At the moment all chats use a shared sqlite database. This doesn't scale well with many people chatting because the entire sqlite database is locked for each write.
 * Notify user with beep or flash or tab icon flashing/color that there's a new message
 e.g. http://heyman.info/2010/sep/30/jquery-title-alert/
 * Add emoticons
@@ -19,4 +21,4 @@ e.g. http://heyman.info/2010/sep/30/jquery-title-alert/
 * TBD
 
 ### Who do I talk to? ###
-* TBD
+Lou Keeble LKEEBLE@YAHOO.COM
