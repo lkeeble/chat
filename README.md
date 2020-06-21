@@ -18,7 +18,7 @@ e.g. http://heyman.info/2010/sep/30/jquery-title-alert/
 
 ### Contribution guidelines ###
 
-* TBD
+* Talk to Lou Keeble as needed about contributions.
 
 ### Who do I talk to? ###
 Lou Keeble LKEEBLE@YAHOO.COM
